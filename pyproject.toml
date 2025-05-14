@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Sota.py"
+dynamic = ["version"]
+description = "A python library for controlling Vstone Sota robot"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+keywords = ["Vstone", "Sota", "robot", "robotics", "gRPC", "protobuf"]
+authors = [
+  { name = "kei-mag", email = "61485115+kei-mag@users.noreply.github.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Developers",
+  "Natural Language :: Japanese",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/kei-mag/Sota.py#readme"
+Issues = "https://github.com/kei-mag/Sota.py/issues"
+Source = "https://github.com/kei-mag/Sota.py"
+
+[tool.hatch.version]
+path = "src/sota/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = ["ruff>=0.11.0"]
+
+[tool.hatch.envs.types.scripts]
+check = "ruff check {args:src/sota tests}"
+format = "ruff format {args:src/sota tests}"
+
+
+[tool.coverage.run]
+source_pkgs = ["sota", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/sota/__about__.py",
+]
+
+[tool.coverage.paths]
+sota = ["src/sota", "*/Sota.py/src/sota"]
+tests = ["tests", "*/Sota.py/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+line-length = 120
